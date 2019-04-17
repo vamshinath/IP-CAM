@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests,os,time,re
 import urllib.parse
-import datetime
+import datetime,pytz
 from requests.auth import HTTPBasicAuth
 vids=[]
 authValue=HTTPBasicAuth('admin', 'vamshi81')
@@ -77,14 +77,14 @@ def loadToList(fl):
 def main():
 
     global vids
-    dt = re.sub("-","",str(datetime.date.today()))
-    os.chdir("saved/"+dt)
+    dt=re.sub("-","",str(datetime.datetime.now(pytz.timezone('Asia/Kolkata')))).split()[0]
+    os.chdir("../photos/"+dt+"/images/")
 
     files=sorted(os.listdir('.'))
 
 
 
-    url = "http://192.168.1.101/sd/"+dt
+    url = "http://192.168.0.111/sd/"+dt
     downloadHelper(url)
 
     mylist=set()

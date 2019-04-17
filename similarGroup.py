@@ -69,6 +69,7 @@ def compare(imgdata1,imgdata2,im1,im2):
 
 
 def scanner(path):
+    print("in scanner:"+path)
     global stm
     try:
         imgdatagen(path)
@@ -106,6 +107,7 @@ def main():
         sys.exit()
     stm=time.time()
     path=os.getcwd()+"/"+sys.argv[1]
+    print("in main")
     for x in os.walk(path):
         scanner(x[0])
 if __name__ == '__main__': main()
