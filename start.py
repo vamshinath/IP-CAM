@@ -4,11 +4,11 @@ import datetime,re
 import pytz
 
 #call("python3 -m http.server 8000 &")
-dt=re.sub("-","",str(datetime.datetime.now(pytz.timezone('Asia/Kolkata')))).split()[0]
-print(dt)
+
 counter = 0
 while True:
-	
+	dt=re.sub("-","",str(datetime.datetime.now(pytz.timezone('Asia/Kolkata')))).split()[0]
+	print(dt)
 	call("python3 similarGroup.py ../photos/"+dt+"/images/")
 	call("python3 get_vid.py")
 	call("python3 h264Sticher.py")
