@@ -11,24 +11,6 @@ imgdata = {}
 smctr=0
 stm=0
 
-
-def validFiles():
-    fls=[]
-    files =os.listdir()
-    for fl in files:
-        if os.stat(fl).st_size < 10000:
-            continue
-        fls.append(fl)
-    return fls
-
-
-def alert(msg,delay):
-    global stm
-    notify2.init("SimilarImages")
-    msg=notify2.Notification("similarGroup",msg+"  "+str(round(time.time()-stm))+"sec","ficon.png")
-    msg.set_timeout(delay*1000)
-    msg.show()
-
 def imgdatagen(path):
     global imgdata
     os.chdir(path)
@@ -76,8 +58,7 @@ def scanner(path):
         global imgdata
         os.chdir(path)
         var=0
-        files = validFiles()
-
+        files=os.listdir()
         ttlcombi = len(files)
         print("no.of validFiles:"+str(ttlcombi))
         time.sleep(4)
@@ -101,21 +82,6 @@ def scanner(path):
         print(arg)
 
 def main():
-    global stm
-    if len(sys.argv) != 2:
-        print("Usage: python3 similarGroup.py dir_name")
-        sys.exit()
-    stm=time.time()
     path=os.getcwd()+"/"+sys.argv[1]
-    print("in main")
-    for x in os.walk(path):
-        scanner(x[0])
+    scanner(path)
 if __name__ == '__main__': main()
-# root=Tk()
-# root.geometry("350x350")
-# label=Label(root,text="Path:")
-# label.pack()
-# b_start = Button(root, text="select Dir")
-# b_start.place(relx=0.5, rely=0.5, anchor=CENTER)
-# b_start['command']=scanner
-# root.mainloop()
